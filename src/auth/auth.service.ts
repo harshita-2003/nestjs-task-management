@@ -43,7 +43,6 @@ export class AuthService {
             where: { username },
             select: ['id', 'username', 'password'], 
         })
-        console.log(user);
         if (user && await bcrypt.compare(password, user.password)) {
             const payload : JwtPayLoad = { username }
             const accessToken = await this.jwtService.sign(payload)
