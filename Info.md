@@ -17,3 +17,10 @@ yarn add -D @types/hapi__joi
 - jwt accesstoken generate : this.jwtService.sign(payload)
 - make a jwt strategy 
 - use like this for route or controller : @UseGuards(AuthGuard())
+
+
+# start 
+- yarn start:dev
+
+test 
+- yarn test --watch
