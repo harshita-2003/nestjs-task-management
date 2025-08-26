@@ -6,7 +6,7 @@ import { TransformInterceptor } from './transform.interceptor';
 async function bootstrap() {
   const logger = new Logger();
   const app = await NestFactory.create(AppModule);
-
+  app.enableCors();
   // Enable global validation pipe
   // This will automatically validate incoming requests based on the DTOs defined
   app.useGlobalPipes(new ValidationPipe())
