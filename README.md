@@ -49,6 +49,8 @@ $ yarn run start:prod
 ```bash
 # unit tests
 $ yarn run test
+# Run in watch mode
+$ yarn test --watch
 
 # e2e tests
 $ yarn run test:e2e
