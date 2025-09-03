@@ -18,6 +18,11 @@ yarn add -D @types/hapi__joi
 - make a jwt strategy 
 - use like this for route or controller : @UseGuards(AuthGuard())
 
+process behind useguards : 
+1. Pulls token from Authorization Header
+2. Verify using Secret Key
+3. call jwtstrategy.validate
+
 
 # start 
 - yarn start:dev
