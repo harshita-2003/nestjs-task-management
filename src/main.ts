@@ -2,11 +2,19 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { Logger, ValidationPipe } from '@nestjs/common';
 import { TransformInterceptor } from './transform.interceptor';
+import { CustomLoggerService } from './logger/logger.service';
 
 async function bootstrap() {
-  const logger = new Logger();
   const app = await NestFactory.create(AppModule);
-  app.enableCors();
+  app.enableCors({
+    origin: "http://localhost:3001",
+    credentials: true, 
+  });
+
+  //custom logger
+  const customLogger = app.get(CustomLoggerService);
+  app.useLogger(customLogger);
+  
   // Enable global validation pipe
   // This will automatically validate incoming requests based on the DTOs defined
   app.useGlobalPipes(new ValidationPipe())
@@ -14,6 +22,6 @@ async function bootstrap() {
 
   const port = 3000;
   await app.listen(port);
-  logger.log(`⚙️ Application listening on port ${port}`);
+  customLogger.log(`⚙️ Application listening on port ${port}`);
 }
 bootstrap();

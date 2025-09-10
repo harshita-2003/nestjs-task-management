@@ -6,15 +6,15 @@ import { Injectable, InternalServerErrorException, Logger, NotFoundException } f
 import { GetTaskFilterDto } from "./dto/get-tasks-filter.dto";
 import { User } from "src/auth/user.entity";
 import { InjectRepository } from "@nestjs/typeorm";
+import { CustomLoggerService } from "src/logger/logger.service";
 
 
 @Injectable()
 export class TaskRepository{
-    private logger = new Logger('TasksRepository');
-
     constructor(
         @InjectRepository(Task)
         private readonly repo: Repository<Task>,
+        private readonly logger: CustomLoggerService
     ) {}
 
     async getTasks(filterDto: GetTaskFilterDto, user: User): Promise<Task[]> {

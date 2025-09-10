@@ -7,14 +7,14 @@ import { Task } from './task.entity';
 import { AuthGuard } from '@nestjs/passport';
 import { GetUser } from '../auth/get-user.decorator';
 import { User } from '../auth/user.entity';
-import { ConfigService } from '@nestjs/config';
+import { CustomLoggerService } from 'src/logger/logger.service';
 
 @Controller('tasks')
 //whole controller is protected , cant access any route without token
 @UseGuards(AuthGuard())
 export class TasksController{
-    private logger = new Logger('TasksController');
-    constructor(private tasksService: TasksService) {}
+    
+    constructor(private tasksService: TasksService, private readonly logger: CustomLoggerService) {}
 
     @Get()
     getTasks(@Query() filterDto : GetTaskFilterDto, @GetUser() user: User) : Promise<Task[]> {
