@@ -32,17 +32,17 @@ import { QueueModule } from './queue/queue.module';
     LoggerModule,
 
 
-
-    BullModule.forRoot({
-      connection: {
-        host: 'localhost',
-        port: 6379,
-      },
-    }),
-    BullModule.registerQueue({
-      name: 'email', // Queue name
-    }),
-    QueueModule,
+    //just to be familiar with the syntax
+    // BullModule.forRoot({
+    //   connection: {
+    //     host: 'localhost',
+    //     port: 6379,
+    //   },
+    // }),
+    // BullModule.registerQueue({
+    //   name: 'email', // Queue name
+    // }),
+    // QueueModule,
   ],
 
   providers: []
