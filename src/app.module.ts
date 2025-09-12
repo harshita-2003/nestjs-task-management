@@ -5,6 +5,8 @@ import { AuthModule } from './auth/auth.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { configValidationSchema } from './config.schema';
 import { LoggerModule } from './logger/logger.module';
+import { BullModule } from '@nestjs/bullmq';
+import { QueueModule } from './queue/queue.module';
 
 @Module({
   imports: [
@@ -27,7 +29,22 @@ import { LoggerModule } from './logger/logger.module';
       }
     }),
     AuthModule,
-    LoggerModule  
+    LoggerModule,
+
+
+
+    BullModule.forRoot({
+      connection: {
+        host: 'localhost',
+        port: 6379,
+      },
+    }),
+    BullModule.registerQueue({
+      name: 'email', // Queue name
+    }),
+    QueueModule,
   ],
+
+  providers: []
 })
 export class AppModule {}
